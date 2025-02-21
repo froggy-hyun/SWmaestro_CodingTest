@@ -70,3 +70,20 @@
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+
+### 정석 풀이
+```
+def is_pair(s):
+    st = list()
+    for c in s:
+        if c == '(':
+            st.append(c)
+
+        if c == ')':
+            try:
+                st.pop()
+            except IndexError:
+                return False
+
+    return len(st) == 0
+ ```
