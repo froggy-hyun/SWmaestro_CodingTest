@@ -1,26 +1,10 @@
 def solution(genres, plays):
     answer = []
-    musics = {}
-    for i in range(len(genres)):
-        if genres[i] not in musics:
-            musics[genres[i]] = {i:plays[i]}
-        else:
-            musics[genres[i]][i] = plays[i]
-            
-    # print(musics)
-    musics = dict(sorted(musics.items(), key = lambda x : sum(x[1].values()), reverse = True))
-    # print(musics)
-    
-    for g in musics:
-        musics[g] = dict(sorted(musics[g].items(), key = lambda x: x[1], reverse = True))
-        
-        
-    for g in musics:
-        if len(list(musics[g].keys())) == 1:
-            answer.append(list(musics[g].keys())[0])
-        else:
-            answer.append(list(musics[g].keys())[0])
-            answer.append(list(musics[g].keys())[1])
+    d = {e:[] for e in set(genres)}
+    for e in zip(genres, plays, range(len(plays))):
+        d[e[0]].append([e[1] , e[2]])
+    genreSort =sorted(list(d.keys()), key= lambda x: sum( map(lambda y: y[0],d[x])), reverse = True)
+    for g in genreSort:
+        temp = [e[1] for e in sorted(d[g],key= lambda x: (x[0], -x[1]), reverse = True)]
+        answer += temp[:2]
     return answer
-            
-#장르 play 순 최다 2개씩. 1개면 1개
