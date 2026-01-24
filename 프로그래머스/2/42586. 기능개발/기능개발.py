@@ -8,8 +8,8 @@ def solution(progresses, speeds):
         for i in range(len(progresses)):      
             if progresses[0] >= 100:
                 count += 1
-                progresses.remove(progresses[0])
-                speeds.remove(speeds[0])
+                progresses.pop(0)
+                speeds.pop(0)
         if count != 0:
             answer.append(count)
                     
