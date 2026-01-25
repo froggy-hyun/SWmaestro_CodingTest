@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 10.3 MB, 시간: 6.52 ms
+메모리: 9.53 MB, 시간: 5.80 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 02월 22일 00:40:10
+2026년 01월 25일 23:10:55
 
 ### 문제 설명
 
@@ -70,20 +70,3 @@
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
-
-### 정석 풀이
-```
-def is_pair(s):
-    st = list()
-    for c in s:
-        if c == '(':
-            st.append(c)
-
-        if c == ')':
-            try:
-                st.pop()
-            except IndexError:
-                return False
-
-    return len(st) == 0
- ```
