@@ -1,11 +1,19 @@
+from collections import deque
+
 def solution(prices):
+    prices = deque(prices)
     answer = []
-    for i in range(len(prices)):
-        duration = 0
-        for j in range(i+1, len(prices)):
-            duration += 1
-            if (prices[i] > prices[j]):
+    temp = 0
+    while(prices):
+        temp = prices.popleft()
+
+        day = 0
+        for p in prices:
+            day += 1
+            if temp > p:
                 break
-        answer.append(duration)
-        
+               
+        temp = 0
+        answer.append(day)
+    
     return answer
