@@ -41,31 +41,31 @@ T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
     N = int(input())
-
-    result = 0
-
     maze = [list(map(int, input())) for _ in range(N)]
 
-    def dfs(y, x):
-        global result
+    stack = []
+    visited = [[False] * N for _ in range(N)]
+    result = 0
 
-        if (y < 0 or y > (N-1) or x < 0 or x > (N-1)):
-            return
-        if maze[y][x] == 1:
-            return
-        if maze[y][x] == 3:
-            result = 1
-            return
-        maze[y][x] = 1
-
-        dfs(y-1, x)
-        dfs(y+1, x)
-        dfs(y, x-1)
-        dfs(y, x+1)
-
+    dy = [-1, 1, 0, 0]
+    dx = [0, 0, -1, 1]
 
     for i in range(N):
         for j in range(N):
             if maze[i][j] == 2:
-                dfs(i, j)
+                stack.append((i,j))
+
+    while(stack):
+        y, x = stack.pop()
+
+        visited[y][x] = True
+
+        if maze[y][x] == 3:
+            result = 1
+
+        for i in range(4):
+            if (0<= y+dy[i] < N and 0<= x+dx[i] < N and visited[y+dy[i]][x+dx[i]] == False):
+                if(maze[y+dy[i]][x+dx[i]] != 1):
+                    stack.append((y+dy[i], x+dx[i]))
+
     print("#%d %d" %(test_case, result))
