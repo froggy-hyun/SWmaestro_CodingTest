@@ -67,6 +67,7 @@ for test_case in range(1, T + 1):
 
         if node == G:
             result = dis
+            break
 
         for n in nodes[node]:
             if(visited[n] == False):
