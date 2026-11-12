@@ -37,6 +37,8 @@ print(f)                                문자열 1개 출력하는 예제
 '''
 #sys.stdin = open("input.txt", "r")
 
+from collections import deque
+
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
@@ -53,28 +55,22 @@ for test_case in range(1, T + 1):
 
     S, G = map(int, input().split())
 
-    result = float("inf")
+    result = 0
 
     visited = [False] * (V+1)
+    visited[S] = True
 
-    def dfs(node, count):
-        global result
+    queue = deque([(S, 0)])
+
+    while queue:
+        node, dis = queue.popleft()
+
+        if node == G:
+            result = dis
 
         for n in nodes[node]:
-
-            if count > result:
-                return
-            if n == G:
-                if(count < result):
-                    result = count
-                    return
-            if (visited[n] == False):
+            if(visited[n] == False):
                 visited[n] = True
-                dfs(n, count + 1)
-                visited[n] = False
-    dfs(S, 1)
-    
-    if (result == float("inf")):
-        result = 0
+                queue.append([n,dis+1])
 
     print("#%d %d" %(test_case, result))
