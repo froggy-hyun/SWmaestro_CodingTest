@@ -53,7 +53,7 @@ for test_case in range(1, T + 1):
     result = 0
 
     queue = deque([S])
-    visited = [False] * V
+    visited = [False] * (V+1)
 
     while(queue):
         node = queue.popleft()
@@ -62,7 +62,8 @@ for test_case in range(1, T + 1):
             result = 1
             break
         for n in nodes[node]:
-            if not visited[node]:
-                queue.append(n) 
+            if not visited[n]:
+                queue.append(n)
+                visited[n] = True
 
     print("#%d %d" %(test_case, result))
