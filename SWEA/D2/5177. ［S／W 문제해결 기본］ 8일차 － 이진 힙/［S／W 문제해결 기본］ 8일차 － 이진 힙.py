@@ -37,6 +37,8 @@ print(f)                                문자열 1개 출력하는 예제
 '''
 #sys.stdin = open("input.txt", "r")
 
+from heapq import heappush
+
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
@@ -44,15 +46,8 @@ for test_case in range(1, T + 1):
     nums = list(map(int, input().split()))
     heap = []
 
-    for i in range(N):
-        heap.append(nums[i])
-        node = i
-        while(node != 0):
-            if heap[node] < heap[(node-1)//2]:
-                heap[node], heap[(node - 1) // 2] = heap[(node-1)//2], heap[node]
-            else:
-                break
-            node = (node - 1) // 2
+    for num in nums:
+        heappush(heap, num)
 
     node = N - 1
     result = 0
