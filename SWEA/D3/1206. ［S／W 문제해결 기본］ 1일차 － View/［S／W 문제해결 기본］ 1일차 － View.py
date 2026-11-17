@@ -11,22 +11,12 @@ for test_case in range(1, T + 1):
 
     result = 0
 
-    def compare(b_index, comp_index):
-        left_count = building_heights[b_index] - building_heights[comp_index]
-        return left_count
-
     for i in range(2, N-2):
-        if i == 2:
-            count = min(compare(i, i+1), compare(i, i+2))
-            if count > 0:
-                result += count
-        elif i == N-2:
-            count = min(compare(i, i - 1), compare(i, i - 2))
-            if count > 0:
-                result += count
-        else:
-            count = min(compare(i, i + 1), compare(i, i + 2), compare(i, i - 1), compare(i, i - 2))
-            if count > 0:
-                result += count
+        tallest_building = max(building_heights[i-2], building_heights[i-1], building_heights[i+1], building_heights[i+2])
+        view = building_heights[i] - tallest_building
+
+        if view > 0:
+            result += view
+
 
     print("#%d %d" %(test_case, result))
